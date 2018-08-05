@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+</head>
+<body class="shower list">
+
+	<section class="slide">
+		<img src="pictures/merge-rebase.gif" style="width: 100%">
+	</section>
+
+	<section class="slide">
+		<h2 class="shout shrink">gitflow</h2>
+	</section>
+
+	<section class="slide">
+		<h2 class="shout shrink">squash + rebase</h2>
+	</section>
+
+	<section class="slide">
+		<h2>gitflow</h2>
+		<ul>
+			<li>Плюсы:
+				<ol>
+					<li class="next">Проста для понимания и использования при <i>линейной</i> разработке</li>
+					<li class="next">?</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>gitflow</h2>
+		<ul>
+			<li>Минусы:
+				<ol>
+					<li class="next">Большое количество мердж-коммитов</li>
+					<li class="next">Как следствие - трудночитаемая история изменений на больших проектах</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<img src="pictures/rsz_git-flow.png" style="height: 100%">
+	</section>
+
+	<section class="slide">
+		<h2>gitflow</h2>
+		<ul>
+			<li>Минусы:
+				<ol>
+					<li>Большое количество мердж-коммитов</li>
+					<li>Как следствие - трудночитаемая история изменений на больших проектах</li>
+					<li>ПР может содержать маленький дифф, но большое количество коммитов</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<img src="pictures/rsz_pr-diff.png" style="height: 100%">
+		<img src="pictures/pr-commits.png" style="height: 100%">
+	</section>
+
+	<section class="slide">
+		<h2>gitflow</h2>
+		<ul>
+			<li>Минусы:
+				<ol>
+					<li>Большое количество мердж-коммитов</li>
+					<li>Как следствие - трудночитаемая история изменений на больших проектах</li>
+					<li>ПР может содержать маленький дифф, но большое количество коммитов</li>
+					<li>Поддержка нескольких версий не описана в методологии
+						<ul class="next">
+							<li>используй <code>support/</code> и <code>git -c flow.branch.develop=</code></li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>squash + rebase</h2>
+		<ul>
+			<li>Плюсы:
+				<ol>
+					<li class="next">Отсутствие мердж коммитов</li>
+					<li class="next">Один ПР - один коммит. Атомарность выходит на новый уровень - атомарный ПР</li>
+					<li class="next">Проще найти, где произошла поломка - коммитов в разы меньше</li>
+					<li class="next">Можно менять порядок изменений и делать промежуточные релизы</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<img src="pictures/rebase.png" style="width: 100%">
+	</section>
+
+	<section class="slide">
+		<h2>squash + rebase</h2>
+		<ul>
+			<li>Плюсы:
+				<ol>
+					<li>Отсутствие мердж коммитов</li>
+					<li>Один ПР - один коммит. Атомарность выходит на новый уровень - атомарный ПР</li>
+					<li>Проще найти, где произошла поломка - коммитов в разы меньше</li>
+					<li>Можно менять порядок изменений и делать промежуточные релизы</li>
+					<li>Есть куда расти</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>squash + rebase</h2>
+		<ul>
+			<li>Минусы:
+				<ol>
+					<li class="next">Сложнее понять работу rebase
+						<ul class="next">
+							<li>Разработчики используют <i>gitflow</i>, мейнтейнер - squash/rebase</li>
+						</ul>
+					</li>
+					<li class="next">Изменение истории - потенциально опасная операция
+						<ul class="next">
+							<li><code>git push --force-with-lease</code> не затрет чужие коммиты</li>
+						</ul>
+					</li>
+					<li class="next">История develop'а может измениться
+						<ul class="next">
+							<li><code>git pull --rebase</code></li>
+						</ul>
+					</li>
+					<li class="next">Resolve одних и тех же конфликтов
+						<ul class="next">
+							<li><code>git rerere</code> должен помочь</li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Полезные сылки:</h2>
+		<ul>
+			<li><a href="https://habrahabr.ru/post/161009/">Git Rebase: руководство по использованию</a></li>
+			<li><a href="https://git-scm.com/book/ru/v1/Инструменты-Git-Перезапись-истории">Git - Перезапись истории</a></li>
+			<li><a href="https://git-scm.com/book/ru/v2/Инструменты-Git-Rerere">Git - Rerere</a></li>
+
+			<p>Презентация: <a href="https://kicumkicum.github.io/presentation-squash-rebase/">https://kicumkicum.github.io/presentation-squash-rebase/</a></p>
+		</ul>
+	</section>
+
+	<div class="progress"></div>
+
+	<script src="node_modules/shower-core/shower.min.js"></script>
+	<!-- Copyright © 2017 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
