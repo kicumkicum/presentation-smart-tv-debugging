@@ -109,7 +109,17 @@
 	<section class="slide">
 		<h2>Remote Logs</h2>
 		<ul style="margin-left: 5%;">
+			<li><span class="precode">Не сложная реализация на сервере и клиенте</span></li>
 			<img style="height: 290px" src="./pictures/remote-logs.png">
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Remote Logs</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Вместо window.console используем обертку</span></li>
+			<li><span class="precode">Это позволит менять логгер при компиляции на подходящий</span></li>
+			<li><span class="precode">Можно слать логи в несколько логгеров одновременно</span></li>
 		</ul>
 	</section>
 
@@ -132,9 +142,9 @@
 	<section class="slide">
 		<h2>Инъекция кода в runtime приложения</h2>
 		<ul style="margin-left: 5%;">
-			<li><span class="precode">ws-сервер шлет на клиент код, который eval'тся</span></li>
+			<li><span class="precode">ws-сервер шлет на клиент код, который eval'ится</span></li>
 			<li><span class="precode">Нет необходимости перезагружать приложение</span></li>
-			<li><span class="precode">В зависимости от архитектуры приложения могут потребоваться закладки в window</span></li>
+			<li><span class="precode">В зависимости от архитектуры могут потребоваться закладки в window</span></li>
 			<li><span class="precode">Теперь пульт не нужен :-)</span></li>
 		</ul>
 	</section>
@@ -160,8 +170,8 @@
 	<section class="slide">
 		<h2>Chrome extension для эмуляции устройства</h2>
 		<ul style="margin-left: 5%;">
-			<li><span class="precode">Эмулируем основное API девайса стабами и пустыми функциями</span></li>
-			<li><span class="precode">Позволит запускать скомпилированное под конкретную платформу приложение</span></li>
+			<li><span class="precode">Эмулируем основное API девайса хардкодом и пустыми функциями</span></li>
+			<li><span class="precode">Позволит запускать в браузере приложение, скомпилированное под конкретную платформу</span></li>
 		</ul>
 	</section>
 
