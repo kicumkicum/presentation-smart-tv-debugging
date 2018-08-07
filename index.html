@@ -6,156 +6,173 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+	<link rel="stylesheet" href="index.css">
 </head>
 <body class="shower list">
 
 	<section class="slide">
-		<img src="pictures/merge-rebase.gif" style="width: 100%">
+		<h2 style="font-size: 100px;" class="shout">Отладка SmartTV приложений</h2>
 	</section>
 
 	<section class="slide">
-		<h2 class="shout shrink">gitflow</h2>
+		<h2 style="font-size: 100px;" class="shout">Chrome remote dev tools</h2>
 	</section>
 
 	<section class="slide">
-		<h2 class="shout shrink">squash + rebase</h2>
+		<h2>Tizen</h2>
+		<ol>
+			<li><span class="precode">Пакуем: </span><code class="code">tizen package --type wgt --sign &lt;security_profile&gt; -- ./build-tizen/</code></li>
+			<li><span class="precode">Коннектимся: </span><code class="code">sdb connect &lt;tv_ip_address&gt;</code></li>
+			<li><span class="precode">Копируем на девайс: </span><code class="code">sdb push ./build-tizen/&lt;project_name&gt;.wgt /opt/usr/apps/tmp</code></li>
+			<li><span class="precode">Устанавливаем: </span><code class="code"  style="font-size: 14px;">sdb shell 0 vd_appinstall &lt;APPLICATION_ID&gt; /opt/usr/apps/tmp/&lt;project_name&gt;.wgt</code></li>
+			<li><span class="precode">Запускаем отладчик: </span><code class="code">sdb shell 0 debug &lt;APPLICATION_ID&gt; 300</code></li>
+		</ol>
 	</section>
 
 	<section class="slide">
-		<h2>gitflow</h2>
-		<ul>
-			<li>Плюсы:
-				<ol>
-					<li class="next">Проста для понимания и использования при <i>линейной</i> разработке</li>
-					<li class="next">?</li>
-				</ol>
-			</li>
+		<h2>WebOS</h2>
+		<ol>
+			<li><span class="precode">Пакуем: </span><code class="code">ares-package src/customization/&lt;projectName&gt;/build-templates/webos</code></li>
+			<li><span class="precode">Коннектимся: </span><code class="code">ares-setup-device -a DEVICE -i "username=root" -i "host=127.0.0.1"</code></li>
+			<li><span class="precode">Устанавливаем: </span><code class="code">ares-install --device DEVICE &lt;path to ipk&gt;</code></li>
+			<li><span class="precode">Запускаем отладчик: </span><code class="code">ares-inspect --device DEVICE --app com.yourdomain.app --open</code></li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h2>Полуофициальные средства</h2>
+		<ol>
+			<li><span class="precode">Получаем ssh/telnet доступ</span></li>
+			<li><span class="precode">Анализируем <code>/var/logs</code></span></li>
+			<li><span class="precode">Анализируем <code>top, ps, /proc</code>: узнаем имя основного процесса и параметров запуска</span></li>
+			<li><span class="precode">Пробуем запустить <code>main_app --help</code> на предмет опций и параметров запуска</span></li>
+			<li><span class="precode">Находим способ быстрой перезагрузки оболочки <code>killall main_app && main_app</code></span></li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h2 style="font-size: 100px;" class="shout">Неофициальные средства. Готовые решения</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Weinre: эмулятор dev tools</h2>
+		<h2 style="font-size: 40px;">Возможности</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">доступны вкладки elements, console, network(плохо работает), profyling (плохо работает)</span></li>
+			<li><span class="precode">отрытый исходный код <a href="https://www.npmjs.com/package/weinre">https://www.npmjs.com/package/weinre</a></span></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>gitflow</h2>
-		<ul>
-			<li>Минусы:
-				<ol>
-					<li class="next">Большое количество мердж-коммитов</li>
-					<li class="next">Как следствие - трудночитаемая история изменений на больших проектах</li>
-				</ol>
-			</li>
+		<h2>Weinre: эмулятор dev tools</h2>
+		<h2 style="font-size: 40px;">Подключение</h2>
+		<ol style="margin-left: 5%;">
+			<li><span class="precode">Добавляем в index.html </span><br><code class="code">&lt;script src="http://YOUR_IP:8080/target/target-script-min.js#anonymous"&gt;&lt;/script&gt;</code></li>
+			<li><span class="precode">Запускаем приложение</span></li>
+			<li><span class="precode">Устанавливаем </span><code class="code">npm i -g weinre</code></li>
+			<li><span class="precode">Стартуем </span><code class="code">weinre --httpPort 8080 --boundHost YOUR_IP</code></li>
+			<li><span class="precode">Открываем в браузере  </span><code class="code">http://YOUR_IP:8080</code></li>
+			<li><span class="precode">Следуем инструкциям</span></li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h2>AppLauncher</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Запускаем разные дев. приложения по ссылке установив всего одно</span></li>
+			<li><span class="precode">Поддержка Tizen, WebOS, Orsay, Netcast, Mag250, Eltex, DuneHD</span></li>
+			<li><span class="precode">Можно добававить поддержку сторонних платформ</span></li>
+			<li><span class="precode"><a href="https://github.com/interfaced/applauncher">https://github.com/interfaced/applauncher</a></span></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<img src="pictures/rsz_git-flow.png" style="height: 100%">
-	</section>
-
-	<section class="slide">
-		<h2>gitflow</h2>
-		<ul>
-			<li>Минусы:
-				<ol>
-					<li>Большое количество мердж-коммитов</li>
-					<li>Как следствие - трудночитаемая история изменений на больших проектах</li>
-					<li>ПР может содержать маленький дифф, но большое количество коммитов</li>
-				</ol>
-			</li>
+		<h2>WireShark</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Анализ запросов, в случае, если нельзя подключиться к девайсу другими способами</span></li>
+			<li><span class="precode">Для подключения изучаем доки или мануалы</span></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<img src="pictures/rsz_pr-diff.png" style="height: 100%">
-		<img src="pictures/pr-commits.png" style="height: 100%">
+		<h2 style="font-size: 100px;" class="shout">Велосипеды</h2>
 	</section>
 
 	<section class="slide">
-		<h2>gitflow</h2>
-		<ul>
-			<li>Минусы:
-				<ol>
-					<li>Большое количество мердж-коммитов</li>
-					<li>Как следствие - трудночитаемая история изменений на больших проектах</li>
-					<li>ПР может содержать маленький дифф, но большое количество коммитов</li>
-					<li>Поддержка нескольких версий не описана в методологии
-						<ul class="next">
-							<li>используй <code>support/</code> и <code>git -c flow.branch.develop=</code></li>
-						</ul>
-					</li>
-				</ol>
-			</li>
+		<h2>app-launcher</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Пилим какой угодно интерфейс вокруг <code>window.location.href = URL;</code></span></li>
+			<li><span class="precode">Можно интегрировать с CI/CD для запуска ПРов, коммитов, веток</span></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>squash + rebase</h2>
-		<ul>
-			<li>Плюсы:
-				<ol>
-					<li class="next">Отсутствие мердж коммитов</li>
-					<li class="next">Один ПР - один коммит. Атомарность выходит на новый уровень - атомарный ПР</li>
-					<li class="next">Проще найти, где произошла поломка - коммитов в разы меньше</li>
-					<li class="next">Можно менять порядок изменений и делать промежуточные релизы</li>
-				</ol>
-			</li>
+		<h2>Remote Logs</h2>
+		<ul style="margin-left: 5%;">
+			<img style="height: 290px" src="./pictures/remote-logs.png">
 		</ul>
 	</section>
 
 	<section class="slide">
-		<img src="pictures/rebase.png" style="width: 100%">
+		<h2>HotKeys</h2>
+			<span class="precode">Биндим экшены на кнопки/комбинации кнопок пульта:</span>
+			<pre><code class="code">window.addEventListener('keydown', (e) => if (e.target.keyCode === 42) location.reload());</code></pre>
 	</section>
 
 	<section class="slide">
-		<h2>squash + rebase</h2>
-		<ul>
-			<li>Плюсы:
-				<ol>
-					<li>Отсутствие мердж коммитов</li>
-					<li>Один ПР - один коммит. Атомарность выходит на новый уровень - атомарный ПР</li>
-					<li>Проще найти, где произошла поломка - коммитов в разы меньше</li>
-					<li>Можно менять порядок изменений и делать промежуточные релизы</li>
-					<li>Есть куда расти</li>
-				</ol>
-			</li>
+		<h2>Автоматизированные сценарии</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Создаем кастомные keydown евенты</span></li>
+			<li><span class="precode">Добавляем утилитарные методы</span></li>
+			<li><span class="precode">API для автотестирования готово!</span></li>
+			<img src="pictures/test-api.png">
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>squash + rebase</h2>
-		<ul>
-			<li>Минусы:
-				<ol>
-					<li class="next">Сложнее понять работу rebase
-						<ul class="next">
-							<li>Разработчики используют <i>gitflow</i>, мейнтейнер - squash/rebase</li>
-						</ul>
-					</li>
-					<li class="next">Изменение истории - потенциально опасная операция
-						<ul class="next">
-							<li><code>git push --force-with-lease</code> не затрет чужие коммиты</li>
-						</ul>
-					</li>
-					<li class="next">История develop'а может измениться
-						<ul class="next">
-							<li><code>git pull --rebase</code></li>
-						</ul>
-					</li>
-					<li class="next">Resolve одних и тех же конфликтов
-						<ul class="next">
-							<li><code>git rerere</code> должен помочь</li>
-						</ul>
-					</li>
-				</ol>
-			</li>
+		<h2>Инъекция кода в runtime приложения</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">ws-сервер шлет на клиент код, который eval'тся</span></li>
+			<li><span class="precode">Нет необходимости перезагружать приложение</span></li>
+			<li><span class="precode">В зависимости от архитектуры приложения могут потребоваться закладки в window</span></li>
+			<li><span class="precode">Теперь пульт не нужен :-)</span></li>
 		</ul>
 	</section>
 
 	<section class="slide">
-		<h2>Полезные сылки:</h2>
-		<ul>
-			<li><a href="https://habrahabr.ru/post/161009/">Git Rebase: руководство по использованию</a></li>
-			<li><a href="https://git-scm.com/book/ru/v1/Инструменты-Git-Перезапись-истории">Git - Перезапись истории</a></li>
-			<li><a href="https://git-scm.com/book/ru/v2/Инструменты-Git-Rerere">Git - Rerere</a></li>
+		<h2>Отображение логов/fps/статистики на экране поверх приложения</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Создаем елемент с <code class="code">position: absolute; z-index: 999; opacity: 0.5;</code></span></li>
+			<li><span class="precode">Пишем в него все, что захотим</span></li>
+			<li><span class="precode">Показываем/прячем по хоткею</span></li>
+		</ul>
+	</section>
 
-			<p>Презентация: <a href="https://kicumkicum.github.io/presentation-squash-rebase/">https://kicumkicum.github.io/presentation-squash-rebase/</a></p>
+	<section class="slide">
+		<h2>Отображения логов/fps/статистики в локальной вкладке</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode"><a href="https://github.com/rempl/rempl">Repml</a>: Платформа для взаимодействия с run-time'ом приложения</span></li>
+			<li><span class="precode"><a href="https://github.com/rempl/rempl">https://github.com/rempl/rempl</a></span></li>
+			<li><span class="precode">Поднимаем свой сервер, который получает информацию от приложения</span></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Chrome extension для эмуляции устройства</h2>
+		<ul style="margin-left: 5%;">
+			<li><span class="precode">Эмулируем основное API девайса стабами и пустыми функциями</span></li>
+			<li><span class="precode">Позволит запускать скомпилированное под конкретную платформу приложение</span></li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<header>
+			<h2>Отладка SmartTV. Кровь и песок</h2>
+		</header>
+		<p>Акинин Олег, SPB TV</p>
+		<ul>
+			<li>github: <a href="https://github.com/kicumkicum">kicumkicum</a></li>
+			<li>mail: <a href="mailto:kicumkicum@gmail.com">kicumkicum@gmail.com</a></li>
 		</ul>
 	</section>
 
